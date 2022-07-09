@@ -1,3 +1,37 @@
 .headerOption {
-    
+ display: flex;   
+ flex-direction: column;
+ align-items: center;
+ margin-right: 20px;
+ color:gray;
+ cursor:pointer;
 }
+
+.headerOption:hover {
+ color:black;
+}
+
+.headerOption__title{
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.headerOption__icon{
+    object-fit: contain;
+    height: 25px !important;
+    width: 25px !important;
+}
+
+.MuiAvatar-root{
+    height: 25px !important;
+    width: 25px !important;
+}
+
+/* .headerOption__icon > 
+
+.headerOption__avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+} */

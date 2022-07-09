@@ -1,5 +1,14 @@
 .header{
+    position: sticky;
+    top:0;
+    z-index:999;
     display: flex;
+    background-color: white;
+    justify-content: space-evenly;
+    border-bottom: 0.1px solid lightgray;
+    padding-top:10px;
+    padding-bottom:10px;
+    width:100%;
 }
 
 .header__left{
@@ -27,4 +36,9 @@
     outline: none;
     background: none;
     border: none;
+}
+
+.header__right{
+    display: flex;
+    /* align-items: center; */
 }
