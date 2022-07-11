@@ -7,8 +7,9 @@ import VideoIcon from '@material-ui/icons/VideoCall'
 import EventIcon from '@material-ui/icons/Event'
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay'
 import Post from './Post'
-import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, addDoc, serverTimestamp, orderBy, query } from "firebase/firestore";
 import { db } from './firebase'
+
 const Feed = () => {
 
     const [post, setPosts] = useState([]);
@@ -39,11 +40,18 @@ const Feed = () => {
     }, [post])
 
     const getData = async () => {
-        const querySnapshot = await getDocs(collection(db, "posts"));
-        setPosts(querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data()
-        })))
+        const collectionRef = collection(db, "posts")
+        const q = query(collectionRef, orderBy("timeStamp", "desc"));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            setPosts(querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data()
+            })))
+        });
+
+        return unsubscribe;
+        // const querySnapshot = await getDocs(collection(db, "posts"));
         // console.log('posts: ', posts);
     }
 
