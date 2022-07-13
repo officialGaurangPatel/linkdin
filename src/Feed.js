@@ -31,8 +31,8 @@ const Feed = () => {
         } catch (e) {
             console.error("Error adding document: ", e);
         }
-
         // setPosts([..posts,])
+        setInput('');
     }
 
     useEffect(() => {
