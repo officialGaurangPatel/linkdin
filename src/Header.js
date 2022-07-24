@@ -7,8 +7,24 @@ import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import businessCenterIcon from '@material-ui/icons/BusinessCenter';
 import SuperviseorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import { useDispatch } from 'react-redux';
+import { logOut } from './features/userSlice';
+import { getAuth, signOut } from "firebase/auth";
+
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const auth = getAuth();
+
+    const logOutApp = () => {
+        dispatch(logOut())
+        signOut(auth).then(() => {
+            // Sign-out successful.
+        }).catch((error) => {
+            alert(error.message);
+        });
+
+    }
     return (
         <div className='header'>
             <div className='header__left'>
@@ -19,7 +35,7 @@ const Header = () => {
                 <div className='header__search'>
                     {/* SearchBox */}
                     <SearchIcon />
-                    <input type="text" />
+                    <input type="text" placeholder='Search' />
                 </div>
             </div>
 
@@ -29,7 +45,7 @@ const Header = () => {
                 <HeaderOption Icon={businessCenterIcon} title='Jobs' />
                 <HeaderOption Icon={ChatIcon} title='Messaging' />
                 <HeaderOption Icon={NotificationsIcon} title='Notifications' />
-                <HeaderOption avatar='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60' title='Me' />
+                <HeaderOption onClick={logOutApp} avatar='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60' title='Me' />
             </div>
         </div>
     )
