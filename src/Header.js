@@ -7,12 +7,13 @@ import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import businessCenterIcon from '@material-ui/icons/BusinessCenter';
 import SuperviseorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { useDispatch } from 'react-redux';
-import { logOut } from './features/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut, selectUser } from './features/userSlice';
 import { getAuth, signOut } from "firebase/auth";
 
 
 const Header = () => {
+    const { user: user } = useSelector(selectUser);
     const dispatch = useDispatch();
     const auth = getAuth();
 
@@ -45,7 +46,7 @@ const Header = () => {
                 <HeaderOption Icon={businessCenterIcon} title='Jobs' />
                 <HeaderOption Icon={ChatIcon} title='Messaging' />
                 <HeaderOption Icon={NotificationsIcon} title='Notifications' />
-                <HeaderOption onClick={logOutApp} avatar='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60' title='Me' />
+                <HeaderOption onClick={logOutApp} avatar={user && user.photoUrl ? user?.photoUrl : user?.email[0]} title={user?.displayName} />
             </div>
         </div>
     )

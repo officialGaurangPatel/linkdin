@@ -26,7 +26,6 @@ function App() {
     })
   }, [])
   const { user: user } = useSelector(selectUser);
-  console.log('user: ', user);
   return (
     <div className="app">
       <Header />
@@ -34,6 +33,7 @@ function App() {
         (<div className='app__body'>
           <Sidebar />
           <Feed />
+          {/* <Widgets/> */}
         </div>)
       }
     </div>
